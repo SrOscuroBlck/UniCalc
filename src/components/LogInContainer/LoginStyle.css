@@ -2,29 +2,44 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap");
 
 /** Global style **/
+
+.loadingPage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f0f2f5;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 }
-body {
+.loginBody {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url("https://raw.githubusercontent.com/mddanishiqbal/login-register-sliding-effect/main/images/bg.jpg");
+  background-color: #f0f2f5;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   transition: 0.5s;
 }
-body.active {
+.loginBody.active {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 }
-.container {
+.authContainer {
   position: relative;
   width: 800px;
   height: 500px;
@@ -186,14 +201,14 @@ body.active {
 
 /** responsive **/
 @media (max-width: 768px) {
-  .container {
+  .authContainer {
     max-width: 400px;
     height: 650px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .container .signInUp {
+  .authContainer .signInUp {
     top: 0;
     height: 100%;
   }

@@ -193,95 +193,96 @@ function LoginContainer() {
           You have been registered successfully.
         </div>
       )}
+      <div className="loginBody">
+        <div className="authContainer">
+          <div className="signInUp">
+            {/* Sign-in Part */}
+            <div className={`box signin ${isSignIn ? "active" : ""}`}>
+              <h1>Bienvenido de Vuelta!</h1>
+              <p>Para ver tu contenido inicia sesión con tus datos personales</p>
+              <button className="signinBtn" type="submit" onClick={handleSignIn}>
+                Iniciar Sesion
+              </button>
+            </div>
 
-      <div className="container">
-        <div className="signInUp">
-          {/* Sign-in Part */}
-          <div className={`box signin ${isSignIn ? "active" : ""}`}>
-            <h1>Bienvenido de Vuelta!</h1>
-            <p>Para ver tu contenido inicia sesión con tus datos personales</p>
-            <button className="signinBtn" type="submit" onClick={handleSignIn}>
-              Iniciar Sesion
-            </button>
+            {/* Sign-up Part */}
+            <div className={`box signup ${!isSignIn ? "active" : ""}`}>
+              <h1>Hola!</h1>
+              <p>Ingresa tus datos persononales para registrarte</p>
+              <button className="signupBtn" type="submit" onClick={handleSignUp}>
+                Registrarse
+              </button>
+            </div>
           </div>
 
-          {/* Sign-up Part */}
-          <div className={`box signup ${!isSignIn ? "active" : ""}`}>
-            <h1>Hola!</h1>
-            <p>Ingresa tus datos persononales para registrarte</p>
-            <button className="signupBtn" type="submit" onClick={handleSignUp}>
-              Registrarse
-            </button>
-          </div>
-        </div>
+          {/* Sign-in/Sign-up Form */}
+          <div className={`form-box ${isSignIn ? "" : "active"}`}>
+            {/* Sign-in Form */}
+            <div className="form signinForm">
+              <img src={uniCalcLogo} alt="" width={80} height={80} />
+              <form>
+                <a href="https://www.google.com/" className="google">
+                  <i className="fab fa-google-plus-g" />
+                  Login with Google
+                </a>
+                <a href="https://www.google.com/" className="facebook">
+                  <i className="fab fa-facebook-f" />
+                  Login with Facebook
+                </a>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                  type="password"
+                  placeholder="Contraseña"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <div className="submit-btn">
+                  <input type="submit" value="Iniciar Sesion" onClick={handleSubmmit} />
+                </div>
+                <a href="https://www.google.com/" className="forget">
+                  Forget Password
+                </a>
+              </form>
+            </div>
 
-        {/* Sign-in/Sign-up Form */}
-        <div className={`form-box ${isSignIn ? "" : "active"}`}>
-          {/* Sign-in Form */}
-          <div className="form signinForm">
-            <img src={uniCalcLogo} alt="" width={80} height={80} />
-            <form>
-              <a href="https://www.google.com/" className="google">
-                <i className="fab fa-google-plus-g" />
-                Login with Google
-              </a>
-              <a href="https://www.google.com/" className="facebook">
-                <i className="fab fa-facebook-f" />
-                Login with Facebook
-              </a>
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                type="password"
-                placeholder="Contraseña"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <div className="submit-btn">
-                <input type="submit" value="Iniciar Sesion" onClick={handleSubmmit} />
-              </div>
-              <a href="https://www.google.com/" className="forget">
-                Forget Password
-              </a>
-            </form>
-          </div>
-
-          {/* Sign-up Form */}
-          <div className="form signupForm">
-            <img src={uniCalcLogo} alt="" width={80} height={80} />
-            <form>
-              <input
-                type="text"
-                placeholder="Usuario"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                type="password"
-                placeholder="Contraseña"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <input
-                type="password"
-                placeholder="Confirmar contraseña"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
-              />
-              <div className="submit-btn">
-                <input type="submit" value="Registrate" onClick={addRegister} />
-              </div>
-            </form>
+            {/* Sign-up Form */}
+            <div className="form signupForm">
+              <img src={uniCalcLogo} alt="" width={80} height={80} />
+              <form>
+                <input
+                  type="text"
+                  placeholder="Usuario"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                  type="password"
+                  placeholder="Contraseña"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <input
+                  type="password"
+                  placeholder="Confirmar contraseña"
+                  value={passwordConfirm}
+                  onChange={(e) => setPasswordConfirm(e.target.value)}
+                />
+                <div className="submit-btn">
+                  <input type="submit" value="Registrate" onClick={addRegister} />
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
