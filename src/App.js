@@ -1,6 +1,6 @@
 import Dash from "Dash";
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { HashRouter as Routes, Route } from "react-router-dom";
 import { AuthProvider } from "context/AuthContext";
 import ProtectedRoute from "components/ProtecteDRouted/ProtectedRouted";
 import LoginContainer from "components/LogInContainer/LoginContainer";
