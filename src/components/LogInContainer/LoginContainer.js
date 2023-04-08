@@ -131,7 +131,6 @@ function LoginContainer() {
       await login(email, password);
       navigate("/");
     } catch (error) {
-      console.log("estoy aqui");
       setFireBaseError(errorFireBase(error.code));
       setFireBaseNotification(true);
       setTimeout(() => {
