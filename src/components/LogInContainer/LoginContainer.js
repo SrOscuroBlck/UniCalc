@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useAuth } from "context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -6,12 +6,9 @@ import uniCalcLogo from "assets/images/logo-ct.svg";
 
 import "./LoginStyle.css";
 
-export const LoginContainer = () => {
-  //Context variables
+function LoginContainer() {
   const { signUp, login } = useAuth();
-
   const navigate = useNavigate();
-
   // Regex for email and password.
   const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   const PASSWORD_REGEX = /^(?=.*?[#?!@$%^&/*-])/;
@@ -79,37 +76,35 @@ export const LoginContainer = () => {
         setFillAllFieldsError(false);
       }, 5000);
       return;
-    } else {
-      if (password !== passwordConfirm) {
-        setPasswordConfirmError(true);
-        setTimeout(() => {
-          setPasswordConfirmError(false);
-        }, 5000);
-        return;
-      }
-      if (!EMAIL_REGEX.test(email) && PASSWORD_REGEX.test(password)) {
-        setEmailError(true);
-        setTimeout(() => {
-          setEmailError(false);
-        }, 5000);
-        return;
-      } else if (EMAIL_REGEX.test(email) && !PASSWORD_REGEX.test(password)) {
-        setPasswordError(true);
-        setTimeout(() => {
-          setPasswordError(false);
-        }, 5000);
-        return;
-      } else if (!EMAIL_REGEX.test(email) && !PASSWORD_REGEX.test(password)) {
-        setGeneralError(true);
-        setTimeout(() => {
-          setGeneralError(false);
-        }, 5000);
-        return;
-      }
     }
-
-    // If there is no error, the register is added.
-
+    if (password !== passwordConfirm) {
+      setPasswordConfirmError(true);
+      setTimeout(() => {
+        setPasswordConfirmError(false);
+      }, 5000);
+      return;
+    }
+    if (!EMAIL_REGEX.test(email) && PASSWORD_REGEX.test(password)) {
+      setEmailError(true);
+      setTimeout(() => {
+        setEmailError(false);
+      }, 5000);
+      return;
+    }
+    if (EMAIL_REGEX.test(email) && !PASSWORD_REGEX.test(password)) {
+      setPasswordError(true);
+      setTimeout(() => {
+        setPasswordError(false);
+      }, 5000);
+      return;
+    }
+    if (!EMAIL_REGEX.test(email) && !PASSWORD_REGEX.test(password)) {
+      setGeneralError(true);
+      setTimeout(() => {
+        setGeneralError(false);
+      }, 5000);
+      return;
+    }
     try {
       await signUp(email, password, userName);
       navigate("/");
@@ -154,14 +149,12 @@ export const LoginContainer = () => {
 
   return (
     <>
-      {/* Error FireBase*/}
       {fireBaseNotification && (
         <div className="notification" id="warn-notification">
           {fireBaseError}
         </div>
       )}
 
-      {/* Error when the password is not properly written */}
       {passwordError && (
         <div className="notification" id="warn-notification">
           La contraseña debe tener al menos un caracter especial. Por ejemplo: #, ?, !, @, $, %, ^,
@@ -169,22 +162,18 @@ export const LoginContainer = () => {
         </div>
       )}
 
-      {/* Error for password different to confirm */}
       {passwordConfirmError && (
         <div className="notification" id="warn-notification">
           Las contraseñas no coinciden.
         </div>
       )}
 
-
-      {/* Error when the email is not properly written */}
       {emailError && (
         <div className="notification" id="warn-notification">
           El email no es válido.
         </div>
       )}
 
-      {/* Both of them have an error */}
       {generalError && (
         <div className="notification" id="warn-notification">
           La contraseña debe tener al menos un caracter especial. Por ejemplo: #, ?, !, @, $, %, ^,
@@ -194,15 +183,12 @@ export const LoginContainer = () => {
         </div>
       )}
 
-      {/* Error when the user doesn't fill all the fields */}
-
       {fillAllFieldsError && (
         <div className="notification" id="warn-notification">
           Por favor, rellena todos los campos.
         </div>
       )}
 
-      {/* Notification when the email has been sent succesfully */}
       {registerSuccess && (
         <div className="notification" id="success-notification">
           You have been registered successfully.
@@ -214,10 +200,8 @@ export const LoginContainer = () => {
           {/* Sign-in Part */}
           <div className={`box signin ${isSignIn ? "active" : ""}`}>
             <h1>Bienvenido de Vuelta!</h1>
-            <p>
-              Para ver tu contenido inicia sesión con tus datos personales
-            </p>
-            <button className="signinBtn" onClick={handleSignIn}>
+            <p>Para ver tu contenido inicia sesión con tus datos personales</p>
+            <button className="signinBtn" type="submit" onClick={handleSignIn}>
               Iniciar Sesion
             </button>
           </div>
@@ -225,10 +209,8 @@ export const LoginContainer = () => {
           {/* Sign-up Part */}
           <div className={`box signup ${!isSignIn ? "active" : ""}`}>
             <h1>Hola!</h1>
-            <p>
-              Ingresa tus datos persononales para registrarte
-            </p>
-            <button className="signupBtn" onClick={handleSignUp}>
+            <p>Ingresa tus datos persononales para registrarte</p>
+            <button className="signupBtn" type="submit" onClick={handleSignUp}>
               Registrarse
             </button>
           </div>
@@ -238,18 +220,15 @@ export const LoginContainer = () => {
         <div className={`form-box ${isSignIn ? "" : "active"}`}>
           {/* Sign-in Form */}
           <div className="form signinForm">
-            <img
-              src={uniCalcLogo}
-              alt=""
-              width={80}
-              height={80}
-            />
+            <img src={uniCalcLogo} alt="" width={80} height={80} />
             <form>
-              <a href="#" className="google">
-                <i className="fab fa-google-plus-g"></i>Login with Google
+              <a href="https://www.google.com/" className="google">
+                <i className="fab fa-google-plus-g" />
+                Login with Google
               </a>
-              <a href="#" className="facebook">
-                <i className="fab fa-facebook-f"></i>Login with Facebook
+              <a href="https://www.google.com/" className="facebook">
+                <i className="fab fa-facebook-f" />
+                Login with Facebook
               </a>
               <input
                 type="email"
@@ -264,9 +243,9 @@ export const LoginContainer = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <div className="submit-btn">
-                <input type="submit" value="Iniciar Sesion" onClick={handleSubmmit}/>
+                <input type="submit" value="Iniciar Sesion" onClick={handleSubmmit} />
               </div>
-              <a href="#" className="forget">
+              <a href="https://www.google.com/" className="forget">
                 Forget Password
               </a>
             </form>
@@ -274,12 +253,7 @@ export const LoginContainer = () => {
 
           {/* Sign-up Form */}
           <div className="form signupForm">
-            <img
-              src={uniCalcLogo}
-              alt=""
-              width={80}
-              height={80}
-            />
+            <img src={uniCalcLogo} alt="" width={80} height={80} />
             <form>
               <input
                 type="text"
@@ -314,4 +288,6 @@ export const LoginContainer = () => {
       </div>
     </>
   );
-};
+}
+
+export default LoginContainer;

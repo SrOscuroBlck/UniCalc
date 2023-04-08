@@ -3,24 +3,24 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "context/AuthContext";
 import ProtectedRoute from "components/ProtecteDRouted/ProtectedRouted";
-import { LoginContainer } from "components/LogInContainer/LoginContainer";
+import LoginContainer from "components/LogInContainer/LoginContainer";
 
-import "./App.css"
+import "./App.css";
 
 export default function App() {
   return (
     <AuthProvider>
-        <Routes>
+      <Routes>
         <Route
-            path="*"
-            element={
+          path="*"
+          element={
             <ProtectedRoute>
-                <Dash />
+              <Dash />
             </ProtectedRoute>
-            }
+          }
         />
         <Route path="/login" element={<LoginContainer />} />
-        </Routes>
+      </Routes>
     </AuthProvider>
-  )
+  );
 }

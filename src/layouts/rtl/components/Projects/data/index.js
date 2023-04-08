@@ -66,12 +66,7 @@ export default function data() {
 
     rows: [
       {
-        المشروع: (
-          <Company
-            image={logoXD}
-            name= "UniCalc"
-          />
-        ),
+        المشروع: <Company image={logoXD} name="UniCalc" />,
         أعضاء: (
           <MDBox display="flex" py={1}>
             {avatars([

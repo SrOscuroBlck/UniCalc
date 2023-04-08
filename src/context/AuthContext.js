@@ -6,8 +6,8 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import { auth, createUserDocs } from "../firebase/config";
 
+import { auth, createUserDocs } from "../firebase/config";
 
 export const AuthContext = createContext();
 
@@ -35,22 +35,23 @@ export function AuthProvider({ children }) {
   const logout = () => signOut(auth);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setCurrentUser(currentUser);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
       setLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
-  const authContextValue = useMemo(() => {
-    return {
+  const authContextValue = useMemo(
+    () => ({
       signUp,
       login,
       user: currentUser,
       logout,
-      loading
-    };
-  }, [currentUser, loading]);
+      loading,
+    }),
+    [currentUser, loading]
+  );
 
   return <AuthContext.Provider value={authContextValue}>{children}</AuthContext.Provider>;
 }

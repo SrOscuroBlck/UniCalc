@@ -34,21 +34,17 @@ import {
 
 import { useAuth } from "context/AuthContext";
 
-
-  
-
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav, transparentSidenav, whiteSidenav, darkMode, sidenavColor } = controller;
   const location = useLocation();
   const collapseName = location.pathname.replace("/", "");
 
-  const { user, loading, logout } = useAuth();
+  const { loading, logout } = useAuth();
 
   const handleLogout = async () => {
     await logout();
   };
-
 
   let textColor = "white";
 

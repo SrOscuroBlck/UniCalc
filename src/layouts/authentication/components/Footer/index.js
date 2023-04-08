@@ -42,7 +42,7 @@ function Footer({ light }) {
               </Icon>
             </MDBox>
             by
-            <Link href="#" target="_blank">
+            <Link href="https://github.com/SrOscuroBlck/UniCalc" target="_blank">
               <MDTypography variant="button" fontWeight="medium" color={light ? "white" : "dark"}>
                 &nbsp;UniCalc&nbsp;
               </MDTypography>
@@ -67,7 +67,7 @@ function Footer({ light }) {
             })}
           >
             <MDBox component="li" pr={2} lineHeight={1}>
-              <Link href="#" target="_blank">
+              <Link href="https://github.com/SrOscuroBlck/UniCalc" target="_blank">
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
