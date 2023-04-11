@@ -49,8 +49,6 @@ export function AuthProvider({ children }) {
     signInWithPopup(auth, provider);
   };
 
-  
-
   const authContextValue = useMemo(
     () => ({
       signUp,
