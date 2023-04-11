@@ -4,10 +4,14 @@ import { useNavigate } from "react-router-dom";
 
 import uniCalcLogo from "assets/images/logo-ct.svg";
 
+import { Button } from "@mui/material";
+
+import GoogleIcon from "@mui/icons-material/Google";
+
 import "./LoginStyle.css";
 
 function LoginContainer() {
-  const { signUp, login } = useAuth();
+  const { signUp, login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
   // Regex for email and password.
   const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -146,6 +150,19 @@ function LoginContainer() {
     setPassword("");
   };
 
+  const handleGoogleLogin = async () => {
+    try {
+      await loginWithGoogle();
+    } catch (error) {
+      setFireBaseError(errorFireBase(error.code));
+      setFireBaseNotification(true);
+      setTimeout(() => {
+        setFireBaseNotification(false);
+      }, 5000);
+      return;
+    }
+  };
+
   return (
     <>
       {fireBaseNotification && (
@@ -221,6 +238,19 @@ function LoginContainer() {
             <div className="form signinForm">
               <img src={uniCalcLogo} alt="" width={80} height={80} />
               <form>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  fullWidth
+                  onClick={handleGoogleLogin}
+                  style={{
+                    backgroundColor: "#4285f4",
+                    color: "#fff",
+                  }}
+                  startIcon={<GoogleIcon />}
+                >
+                  Continuar con Google
+                </Button>
                 <a href="https://www.google.com/" className="google">
                   <i className="fab fa-google-plus-g" />
                   Login with Google

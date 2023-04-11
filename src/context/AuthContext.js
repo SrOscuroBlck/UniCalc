@@ -5,6 +5,8 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
 
 import { auth, createUserDocs } from "../firebase/config";
@@ -42,12 +44,20 @@ export function AuthProvider({ children }) {
     return () => unsubscribe();
   }, []);
 
+  const loginWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider);
+  };
+
+  
+
   const authContextValue = useMemo(
     () => ({
       signUp,
       login,
       user: currentUser,
       logout,
+      loginWithGoogle,
       loading,
     }),
     [currentUser, loading]
