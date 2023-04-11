@@ -159,7 +159,6 @@ function LoginContainer() {
       setTimeout(() => {
         setFireBaseNotification(false);
       }, 5000);
-      return;
     }
   };
 
