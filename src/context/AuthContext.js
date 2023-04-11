@@ -7,6 +7,7 @@ import {
   signOut,
   signInWithPopup,
   GoogleAuthProvider,
+  GithubAuthProvider,
 } from "firebase/auth";
 
 import { auth, createUserDocs } from "../firebase/config";
@@ -49,6 +50,11 @@ export function AuthProvider({ children }) {
     signInWithPopup(auth, provider);
   };
 
+  const loginWithGithub = () => {
+    const provider = new GithubAuthProvider();
+    signInWithPopup(auth, provider);
+  };
+
   const authContextValue = useMemo(
     () => ({
       signUp,
@@ -56,6 +62,7 @@ export function AuthProvider({ children }) {
       user: currentUser,
       logout,
       loginWithGoogle,
+      loginWithGithub,
       loading,
     }),
     [currentUser, loading]

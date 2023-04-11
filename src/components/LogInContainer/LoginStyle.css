@@ -254,6 +254,28 @@
   }
 }
 
+.socialButton {
+  color: "#fff";
+  border-radius: "50%";
+  width: "48px";
+  height: "48px";
+  min-width: "0";
+  min-height: "0";
+  padding: "0";
+  font-size: "16px";
+  line-height: "1";
+  position: "relative";
+}
+
+.socialLog{
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+  flex-direction: row;
+  height: 50px;
+  margin: 0 auto 20px; 
+}
+
 #success-notification {
 	position: fixed;
 	bottom: 20px;

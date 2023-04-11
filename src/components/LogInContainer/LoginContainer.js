@@ -7,11 +7,13 @@ import uniCalcLogo from "assets/images/logo-ct.svg";
 import { Button } from "@mui/material";
 
 import GoogleIcon from "@mui/icons-material/Google";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 import "./LoginStyle.css";
 
 function LoginContainer() {
-  const { signUp, login, loginWithGoogle } = useAuth();
+  const { signUp, login, loginWithGoogle, loginWithGithub } = useAuth();
   const navigate = useNavigate();
   // Regex for email and password.
   const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -153,6 +155,20 @@ function LoginContainer() {
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle();
+      navigate("/");
+    } catch (error) {
+      setFireBaseError(errorFireBase(error.code));
+      setFireBaseNotification(true);
+      setTimeout(() => {
+        setFireBaseNotification(false);
+      }, 5000);
+    }
+  };
+
+  const handleGithubLogin = async () => {
+    try {
+      await loginWithGithub();
+      navigate("/");
     } catch (error) {
       setFireBaseError(errorFireBase(error.code));
       setFireBaseNotification(true);
@@ -237,27 +253,97 @@ function LoginContainer() {
             <div className="form signinForm">
               <img src={uniCalcLogo} alt="" width={80} height={80} />
               <form>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  fullWidth
-                  onClick={handleGoogleLogin}
-                  style={{
-                    backgroundColor: "#4285f4",
-                    color: "#fff",
-                  }}
-                  startIcon={<GoogleIcon />}
-                >
-                  Continuar con Google
-                </Button>
-                <a href="https://www.google.com/" className="google">
-                  <i className="fab fa-google-plus-g" />
-                  Login with Google
-                </a>
-                <a href="https://www.google.com/" className="facebook">
-                  <i className="fab fa-facebook-f" />
-                  Login with Facebook
-                </a>
+                <div className="socialLog">
+                  <Button
+                    type="submit"
+                    className="socialButton"
+                    variant="contained"
+                    onClick={handleGoogleLogin}
+                    style={{
+                      backgroundColor: "#db3236",
+                      borderRadius: "50%",
+                      width: "50px",
+                      height: "50px",
+                      margin: "0 10px",
+                      color: "#fff",
+                      minWidth: "0",
+                      minHeight: "0",
+                      padding: "0",
+                      fontSize: "16px",
+                      lineHeight: "1",
+                      position: "relative",
+                    }}
+                  >
+                    <GoogleIcon
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)", // Center the icon vertically and horizontally
+                      }}
+                    />
+                  </Button>
+
+                  <Button
+                    type="submit"
+                    className="socialButton"
+                    variant="contained"
+                    onClick={handleGoogleLogin}
+                    style={{
+                      backgroundColor: "#3b5998",
+                      borderRadius: "50%",
+                      width: "50px",
+                      height: "50px",
+                      margin: "0 10px",
+                      color: "#fff",
+                      minWidth: "0",
+                      minHeight: "0",
+                      padding: "0",
+                      fontSize: "16px",
+                      lineHeight: "1",
+                      position: "relative",
+                    }}
+                  >
+                    <FacebookIcon
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)", // Center the icon vertically and horizontally
+                      }}
+                    />
+                  </Button>
+
+                  <Button
+                    type="submit"
+                    className="socialButton"
+                    variant="contained"
+                    onClick={handleGithubLogin}
+                    style={{
+                      backgroundColor: "#333",
+                      borderRadius: "50%",
+                      width: "50px",
+                      height: "50px",
+                      margin: "0 10px",
+                      color: "#fff",
+                      minWidth: "0",
+                      minHeight: "0",
+                      padding: "0",
+                      fontSize: "16px",
+                      lineHeight: "1",
+                      position: "relative",
+                    }}
+                  >
+                    <GitHubIcon
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)", // Center the icon vertically and horizontally
+                      }}
+                    />
+                  </Button>
+                </div>
                 <input
                   type="email"
                   placeholder="Email"
