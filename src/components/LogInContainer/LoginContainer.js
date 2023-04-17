@@ -155,7 +155,7 @@ function LoginContainer() {
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle();
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       setFireBaseError(errorFireBase(error.code));
       setFireBaseNotification(true);
@@ -168,7 +168,7 @@ function LoginContainer() {
   const handleGithubLogin = async () => {
     try {
       await loginWithGithub();
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       setFireBaseError(errorFireBase(error.code));
       setFireBaseNotification(true);
