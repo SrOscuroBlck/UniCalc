@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "context/AuthContext";
 import ProtectedRoute from "components/ProtecteDRouted/ProtectedRouted";
 import LoginContainer from "components/LogInContainer/LoginContainer";
+import ForgetPassword from "components/ForgetContainer/ForgetPassword";
 
 import "./App.css";
 
@@ -20,6 +21,7 @@ export default function App() {
           }
         />
         <Route path="/login" element={<LoginContainer />} />
+        <Route path="/forget" element={<ForgetPassword />} />
       </Routes>
     </AuthProvider>
   );

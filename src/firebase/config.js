@@ -23,16 +23,27 @@ export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 
-export const createUserDocs = async (user) => {
+export const createUserDocs = async (user, userName) => {
   if (!user) {
     return;
   }
 
+  let displayName;
+
+  if (userName) {
+    displayName = userName;
+  } else {
+    displayName = user.displayName;
+  }
+
   const userRef = doc(collection(db, "Registers"), user.uid);
+
+  
 
   try {
     await setDoc(userRef, {
       email: user.email,
+      name: displayName,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
