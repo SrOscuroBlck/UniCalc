@@ -9,6 +9,7 @@ import {
   GoogleAuthProvider,
   GithubAuthProvider,
   FacebookAuthProvider,
+  TwitterAuthProvider,
   sendPasswordResetEmail,
 } from "firebase/auth";
 
@@ -90,6 +91,20 @@ export function AuthProvider({ children }) {
       });
   };
 
+  const loginWithTwitter = () => {
+    const provider = new TwitterAuthProvider();
+    return signInWithPopup(auth, provider)
+      .then((result) => {
+        createUserDocs(result);
+        console.log(result);
+        console.log(result.user);
+        return true; // return a value to indicate successful authentication
+      })
+      .catch((error) => {
+        throw error; // re-throw the error to be handled by the caller
+      });
+  };
+
   const authContextValue = useMemo(
     () => ({
       signUp,
@@ -99,6 +114,7 @@ export function AuthProvider({ children }) {
       loginWithGoogle,
       loginWithGithub,
       loginWithFacebook,
+      loginWithTwitter,
       loading,
       resetPassword,
     }),

@@ -9,11 +9,14 @@ import { Button } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import TwitterIcon from "@mui/icons-material/Twitter";
 
 import "./LoginStyle.css";
 
 function LoginContainer() {
-  const { signUp, login, loginWithGoogle, loginWithGithub, loginWithFacebook } = useAuth();
+  const { signUp, login, loginWithGoogle, loginWithGithub, loginWithFacebook, loginWithTwitter } =
+    useAuth();
+
   const navigate = useNavigate();
   // Regex for email and password.
   const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -194,6 +197,20 @@ function LoginContainer() {
     }
   };
 
+  const handleTwitterLogin = async (event) => {
+    event.preventDefault();
+    try {
+      await loginWithTwitter();
+      navigate("/");
+    } catch (error) {
+      setFireBaseError(errorFireBase(error.code));
+      setFireBaseNotification(true);
+      setTimeout(() => {
+        setFireBaseNotification(false);
+      }, 5000);
+    }
+  };
+
   return (
     <>
       {fireBaseNotification && (
@@ -351,6 +368,35 @@ function LoginContainer() {
                     }}
                   >
                     <GitHubIcon
+                      style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)", // Center the icon vertically and horizontally
+                      }}
+                    />
+                  </Button>
+                  <Button
+                    type="submit"
+                    className="socialButton"
+                    variant="contained"
+                    onClick={handleTwitterLogin}
+                    style={{
+                      backgroundColor: "#00acee",
+                      borderRadius: "50%",
+                      width: "50px",
+                      height: "50px",
+                      margin: "0 10px",
+                      color: "#fff",
+                      minWidth: "0",
+                      minHeight: "0",
+                      padding: "0",
+                      fontSize: "16px",
+                      lineHeight: "1",
+                      position: "relative",
+                    }}
+                  >
+                    <TwitterIcon
                       style={{
                         position: "absolute",
                         top: "50%",
