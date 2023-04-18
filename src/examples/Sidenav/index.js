@@ -175,14 +175,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
       />
       <List>{renderRoutes}</List>
       <MDBox p={2} mt="auto">
-        <MDButton
-          flat
-          primary
-          fullWidth
-          variant="gradient"
-          color={sidenavColor}
-          onClick={handleLogout}
-        >
+        <MDButton fullWidth variant="gradient" color={sidenavColor} onClick={handleLogout}>
           Logout
         </MDButton>
       </MDBox>

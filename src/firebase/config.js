@@ -38,8 +38,6 @@ export const createUserDocs = async (user, userName) => {
 
   const userRef = doc(collection(db, "Registers"), user.uid);
 
-  
-
   try {
     await setDoc(userRef, {
       email: user.email,

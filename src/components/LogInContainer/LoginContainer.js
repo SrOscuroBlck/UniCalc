@@ -152,10 +152,11 @@ function LoginContainer() {
     setPassword("");
   };
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleLogin = async (event) => {
+    event.preventDefault();
     try {
       await loginWithGoogle();
-      navigate("/dashboard");
+      navigate("/");
     } catch (error) {
       setFireBaseError(errorFireBase(error.code));
       setFireBaseNotification(true);
@@ -165,10 +166,11 @@ function LoginContainer() {
     }
   };
 
-  const handleGithubLogin = async () => {
+  const handleGithubLogin = async (event) => {
+    event.preventDefault();
     try {
       await loginWithGithub();
-      navigate("/dashboard");
+      navigate("/");
     } catch (error) {
       setFireBaseError(errorFireBase(error.code));
       setFireBaseNotification(true);

@@ -52,14 +52,26 @@ export function AuthProvider({ children }) {
 
   const loginWithGoogle = () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
-    createUserDocs(currentUser);
+    return signInWithPopup(auth, provider)
+      .then(() => {
+        createUserDocs(currentUser);
+        return true; // return a value to indicate successful authentication
+      })
+      .catch((error) => {
+        throw error; // re-throw the error to be handled by the caller
+      });
   };
 
   const loginWithGithub = () => {
     const provider = new GithubAuthProvider();
-    signInWithPopup(auth, provider);
-    createUserDocs(currentUser);
+    return signInWithPopup(auth, provider)
+      .then(() => {
+        createUserDocs(currentUser);
+        return true; // return a value to indicate successful authentication
+      })
+      .catch((error) => {
+        throw error; // re-throw the error to be handled by the caller
+      });
   };
 
   const authContextValue = useMemo(
