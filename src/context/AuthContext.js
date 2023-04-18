@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   GithubAuthProvider,
+  FacebookAuthProvider,
   sendPasswordResetEmail,
 } from "firebase/auth";
 
@@ -53,8 +54,9 @@ export function AuthProvider({ children }) {
   const loginWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     return signInWithPopup(auth, provider)
-      .then(() => {
-        createUserDocs(currentUser);
+      .then((result) => {
+        createUserDocs(result.user);
+        console.log(result.user);
         return true; // return a value to indicate successful authentication
       })
       .catch((error) => {
@@ -74,6 +76,20 @@ export function AuthProvider({ children }) {
       });
   };
 
+  const loginWithFacebook = () => {
+    const provider = new FacebookAuthProvider();
+    return signInWithPopup(auth, provider)
+      .then((result) => {
+        createUserDocs(result.user);
+        console.log(result);
+        console.log(result.user);
+        return true; // return a value to indicate successful authentication
+      })
+      .catch((error) => {
+        throw error; // re-throw the error to be handled by the caller
+      });
+  };
+
   const authContextValue = useMemo(
     () => ({
       signUp,
@@ -82,6 +98,7 @@ export function AuthProvider({ children }) {
       logout,
       loginWithGoogle,
       loginWithGithub,
+      loginWithFacebook,
       loading,
       resetPassword,
     }),

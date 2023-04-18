@@ -13,7 +13,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import "./LoginStyle.css";
 
 function LoginContainer() {
-  const { signUp, login, loginWithGoogle, loginWithGithub } = useAuth();
+  const { signUp, login, loginWithGoogle, loginWithGithub, loginWithFacebook } = useAuth();
   const navigate = useNavigate();
   // Regex for email and password.
   const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -180,6 +180,20 @@ function LoginContainer() {
     }
   };
 
+  const handleFacebookLogin = async (event) => {
+    event.preventDefault();
+    try {
+      await loginWithFacebook();
+      navigate("/");
+    } catch (error) {
+      setFireBaseError(errorFireBase(error.code));
+      setFireBaseNotification(true);
+      setTimeout(() => {
+        setFireBaseNotification(false);
+      }, 5000);
+    }
+  };
+
   return (
     <>
       {fireBaseNotification && (
@@ -242,7 +256,7 @@ function LoginContainer() {
             {/* Sign-up Part */}
             <div className={`box signup ${!isSignIn ? "active" : ""}`}>
               <h1>Hola!</h1>
-              <p>Ingresa tus datos persononales para registrarte</p>
+              <p>Ingresa tus datos personales para registrarte</p>
               <button className="signupBtn" type="submit" onClick={handleSignUp}>
                 Registrarse
               </button>
@@ -290,7 +304,7 @@ function LoginContainer() {
                     type="submit"
                     className="socialButton"
                     variant="contained"
-                    onClick={handleGoogleLogin}
+                    onClick={handleFacebookLogin}
                     style={{
                       backgroundColor: "#3b5998",
                       borderRadius: "50%",
