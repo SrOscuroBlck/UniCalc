@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import uniCalcLogo from "assets/images/logo-ct.svg";
 
@@ -359,9 +359,7 @@ function LoginContainer() {
                 <div className="submit-btn">
                   <input type="submit" value="Iniciar Sesion" onClick={handleSubmmit} />
                 </div>
-                <a href="https://www.google.com/" className="forget">
-                  Forget Password
-                </a>
+                <Link to="/forget">¿Olvidaste tu contraseña?</Link>
               </form>
             </div>
 

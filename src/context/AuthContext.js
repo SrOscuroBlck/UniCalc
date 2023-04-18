@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   GithubAuthProvider,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 import { auth, createUserDocs } from "../firebase/config";
@@ -26,13 +27,17 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const signUp = async (email, password) => {
+  const signUp = async (email, password, userName) => {
     const { user } = await createUserWithEmailAndPassword(auth, email, password);
-    await createUserDocs(user);
+    await createUserDocs(user, userName);
   };
 
   const login = async (email, password) => {
     await signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const resetPassword = async (email) => {
+    await sendPasswordResetEmail(auth, email);
   };
 
   const logout = () => signOut(auth);
@@ -48,11 +53,13 @@ export function AuthProvider({ children }) {
   const loginWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider);
+    createUserDocs(currentUser);
   };
 
   const loginWithGithub = () => {
     const provider = new GithubAuthProvider();
     signInWithPopup(auth, provider);
+    createUserDocs(currentUser);
   };
 
   const authContextValue = useMemo(
@@ -64,6 +71,7 @@ export function AuthProvider({ children }) {
       loginWithGoogle,
       loginWithGithub,
       loading,
+      resetPassword,
     }),
     [currentUser, loading]
   );
