@@ -155,7 +155,7 @@ function LoginContainer() {
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle();
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       setFireBaseError(errorFireBase(error.code));
       setFireBaseNotification(true);
@@ -168,7 +168,7 @@ function LoginContainer() {
   const handleGithubLogin = async () => {
     try {
       await loginWithGithub();
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       setFireBaseError(errorFireBase(error.code));
       setFireBaseNotification(true);
@@ -233,14 +233,14 @@ function LoginContainer() {
               <h1>Bienvenido de Vuelta!</h1>
               <p>Para ver tu contenido inicia sesión con tus datos personales</p>
               <button className="signinBtn" type="submit" onClick={handleSignIn}>
-                Iniciar Sesion
+                Iniciar Sesión
               </button>
             </div>
 
             {/* Sign-up Part */}
             <div className={`box signup ${!isSignIn ? "active" : ""}`}>
               <h1>Hola!</h1>
-              <p>Ingresa tus datos persononales para registrarte</p>
+              <p>Ingresa tus datos personales para registrarte</p>
               <button className="signupBtn" type="submit" onClick={handleSignUp}>
                 Registrarse
               </button>
