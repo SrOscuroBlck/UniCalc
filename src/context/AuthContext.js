@@ -13,7 +13,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 
-import { auth, createUserDocs } from "../firebase/config";
+import { auth, createUserDocs } from "firebaseConfig/config";
 
 export const AuthContext = createContext();
 

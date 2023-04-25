@@ -4,8 +4,7 @@
   "private": true,
   "author": "UniCalc",
   "description": "UniCalc is a web application that allows students to calculate their grades and GPA. It also allows students to track their progress and see how they are doing in their classes.",
-  "bugs": {
-  },
+  "bugs": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SrOscuroBlck/UniCalc.git"
@@ -27,7 +26,7 @@
     "chart.js": "3.4.1",
     "chroma-js": "2.4.2",
     "firebase": "^9.19.1",
-    "prop-types": "15.8.1",
+    "prop-types": "^15.8.1",
     "react": "17.0.2",
     "react-chartjs-2": "3.0.4",
     "react-dom": "17.0.2",

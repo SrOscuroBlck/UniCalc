@@ -75,7 +75,7 @@ const autocomplete = {
       },
 
       "& .MuiSvgIcon-root, & .MuiSvgIcon-root:hover, & .MuiSvgIcon-root:focus": {
-        color: white.main,
+        color: dark.main,
         marginRight: 0,
       },
     },

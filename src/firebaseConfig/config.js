@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, setDoc, doc } from "firebase/firestore";
+import { getFirestore, collection, setDoc, doc, getDocs } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -58,13 +58,12 @@ export const createUserDocs = async (user, userName, photo) => {
   }
 };
 
-// export const getRegisters = async () => {
-//     const registersReference = collection(db, "Registers");
-//     const snapshot = await getDocs(registersReference);
-//     const registers = snapshot.docs.map((doc) =>  {
-//         return {
-//             ...doc.data()
-//         }
-//     })
-//     return registers;
-// }
+export const getRegisters = async () => {
+  const registersReference = collection(db, "Registers");
+  const snapshot = await getDocs(registersReference);
+  const registers = snapshot.docs.map((document) => ({
+    ...document.data(),
+    id: document.id,
+  }));
+  return registers;
+};
