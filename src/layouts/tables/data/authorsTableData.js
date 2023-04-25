@@ -3,160 +3,104 @@
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDAvatar from "components/MDAvatar";
 import MDBadge from "components/MDBadge";
 
-// Images
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
+import { useAuth } from "context/AuthContext";
+
+import { useState, useEffect } from "react";
+
+import { getSubjects } from "firebaseConfig/config";
+
+function average(first, second, third) {
+  if (first === -1 || second === -1 || third === -1) {
+    return "Sin calificar";
+  }
+
+  console.log((first * 0.3 + second * 0.3 + third * 0.4).toFixed(2));
+  return (first * 0.3 + second * 0.3 + third * 0.4).toFixed(2);
+}
+
+function status(grade) {
+  if (grade === "Sin calificar") {
+    return {
+      color: "dark",
+      text: "Sin calificar",
+    };
+  }
+  if (grade < 3) {
+    return {
+      color: "error",
+      text: "Reprobado",
+    };
+  }
+  if (grade >= 3) {
+    return {
+      color: "success",
+      text: "Aprobado",
+    };
+  }
+  return {
+    color: "dark",
+    text: "Sin calificar",
+  };
+}
 
 export default function data() {
-  const Author = ({ image, name, email }) => (
+  const [rows, setRows] = useState([]);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    getSubjects(user).then((result) => {
+      const newRows = result.map((subject) => ({
+        subject: <Subject name={subject.subject} />,
+        average: <Average grade={average(subject.firstCut, subject.secondCut, subject.thirdCut)} />,
+        status: (
+          <MDBox ml={-1}>
+            <MDBadge
+              badgeContent={
+                status(average(subject.firstCut, subject.secondCut, subject.thirdCut)).text
+              }
+              color={status(average(subject.firstCut, subject.secondCut, subject.thirdCut)).color}
+              variant="gradient"
+              size="sm"
+            />
+          </MDBox>
+        ),
+        action: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            Edit
+          </MDTypography>
+        ),
+      }));
+      setRows(newRows);
+    });
+  }, [rows]);
+
+  const Subject = ({ name }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
-      <MDAvatar src={image} name={name} size="sm" />
-      <MDBox ml={2} lineHeight={1}>
-        <MDTypography display="block" variant="button" fontWeight="medium">
-          {name}
-        </MDTypography>
-        <MDTypography variant="caption">{email}</MDTypography>
-      </MDBox>
+      <MDTypography display="block" variant="button" fontWeight="medium">
+        {name}
+      </MDTypography>
     </MDBox>
   );
 
-  const Job = ({ title, description }) => (
+  const Average = ({ grade }) => (
     <MDBox lineHeight={1} textAlign="left">
       <MDTypography display="block" variant="caption" color="text" fontWeight="medium">
-        {title}
+        Ponderado
       </MDTypography>
-      <MDTypography variant="caption">{description}</MDTypography>
+      <MDTypography variant="caption">{grade.toString()}</MDTypography>
     </MDBox>
   );
 
   return {
     columns: [
-      { Header: "author", accessor: "author", width: "45%", align: "left" },
-      { Header: "function", accessor: "function", align: "left" },
-      { Header: "status", accessor: "status", align: "center" },
-      { Header: "employed", accessor: "employed", align: "center" },
+      { Header: "Materia", accessor: "subject", width: "45%", align: "left" },
+      { Header: "Promedio", accessor: "average", align: "left" },
+      { Header: "Estado", accessor: "status", align: "center" },
       { Header: "action", accessor: "action", align: "center" },
     ],
 
-    rows: [
-      {
-        author: <Author image={team2} name="John Michael" email="john@unicalc.com" />,
-        function: <Job title="Manager" description="Organization" />,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        employed: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            23/04/18
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-      {
-        author: <Author image={team3} name="Alexa Liras" email="alexa@unicalc.com" />,
-        function: <Job title="Programator" description="Developer" />,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        employed: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            11/01/19
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-      {
-        author: <Author image={team4} name="Laurent Perrier" email="laurent@unicalc.com" />,
-        function: <Job title="Executive" description="Projects" />,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        employed: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            19/09/17
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-      {
-        author: <Author image={team3} name="Michael Levi" email="michael@unicalc.com" />,
-        function: <Job title="Programator" description="Developer" />,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        employed: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            24/12/08
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-      {
-        author: <Author image={team3} name="Richard Gran" email="richard@unicalc.com" />,
-        function: <Job title="Manager" description="Executive" />,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        employed: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            04/10/21
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-      {
-        author: <Author image={team4} name="Miriam Eric" email="miriam@unicalc.com" />,
-        function: <Job title="Programator" description="Developer" />,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="offline" color="dark" variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        employed: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            14/09/20
-          </MDTypography>
-        ),
-        action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
-        ),
-      },
-    ],
+    rows,
   };
 }

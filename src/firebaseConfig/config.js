@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, setDoc, doc } from "firebase/firestore";
+import { getFirestore, collection, setDoc, doc, getDocs } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -55,6 +55,54 @@ export const createUserDocs = async (user, userName, photo) => {
     });
   } catch (error) {
     console.log(error);
+  }
+};
+
+// create user subject in firestore
+
+export const createSubject = async (
+  user,
+  subject,
+  firstCut = -1,
+  secondCut = -1,
+  thirdCut = -1
+) => {
+  if (!user) {
+    return;
+  }
+
+  const subjectRef = doc(collection(db, "Registers"), user.uid, "subjects", subject);
+
+  try {
+    await setDoc(subjectRef, {
+      subject,
+      firstCut,
+      secondCut,
+      thirdCut,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getSubjects = async (user) => {
+  if (!user) {
+    return null;
+  }
+  const subjectRef = collection(db, "Registers", user.uid, "subjects");
+
+  try {
+    const snapshot = await getDocs(subjectRef);
+    console.log(snapshot);
+    const subjects = snapshot.docs.map((document) => ({
+      id: document.id,
+      ...document.data(),
+    }));
+    console.log(subjects);
+    return subjects;
+  } catch (error) {
+    console.log(error);
+    return null;
   }
 };
 

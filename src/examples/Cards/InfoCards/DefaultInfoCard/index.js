@@ -6,11 +6,29 @@ import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import Icon from "@mui/material/Icon";
 
+import { useState } from "react";
+import { createSubject } from "firebaseConfig/config";
+import { useAuth } from "context/AuthContext";
+
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+import MDInput from "components/MDInput";
+import MDButton from "components/MDButton";
 
-function DefaultInfoCard({ color, icon, title, description, value }) {
+function DefaultInfoCard({ color, icon, title, description, value, action }) {
+  const { user } = useAuth();
+  const [subject, setSubject] = useState("");
+  const [firstCut, setFirstCut] = useState();
+  const [secondCut, setSecondCut] = useState();
+  const [thirdCut, setThirdCut] = useState();
+  const handleAddSubject = () => {
+    createSubject(user, subject, firstCut, secondCut, thirdCut);
+    setFirstCut(-1);
+    setSecondCut(-1);
+    setThirdCut(-1);
+    setSubject("");
+  };
   return (
     <Card>
       <MDBox p={2} mx={3} display="flex" justifyContent="center">
@@ -44,6 +62,17 @@ function DefaultInfoCard({ color, icon, title, description, value }) {
             {value}
           </MDTypography>
         )}
+        <MDInput label="Nombre de la materia" onChange={(e) => setSubject(e.target.value)} />
+        <br />
+        <MDInput label="Nota Corte 1" onChange={(e) => setFirstCut(e.target.value)} />
+        <MDInput label="Nota Corte 2" onChange={(e) => setSecondCut(e.target.value)} />
+        <MDInput label="Nota Corte 3" onChange={(e) => setThirdCut(e.target.value)} />
+        <MDBox mt={2}>
+          <MDButton variant="gradient" color="success" onClick={handleAddSubject}>
+            Agregar
+          </MDButton>
+        </MDBox>
+        {action && <MDBox mt={2}>{action}</MDBox>}
       </MDBox>
     </Card>
   );
@@ -54,6 +83,7 @@ DefaultInfoCard.defaultProps = {
   color: "info",
   value: "",
   description: "",
+  action: null,
 };
 
 // Typechecking props for the DefaultInfoCard
@@ -63,6 +93,7 @@ DefaultInfoCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  action: PropTypes.node,
 };
 
 export default DefaultInfoCard;
