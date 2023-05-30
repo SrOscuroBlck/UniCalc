@@ -62,11 +62,22 @@ function DefaultInfoCard({ color, icon, title, description, value, action }) {
             {value}
           </MDTypography>
         )}
-        <MDInput label="Nombre de la materia" onChange={(e) => setSubject(e.target.value)} />
-        <br />
-        <MDInput label="Nota Corte 1" onChange={(e) => setFirstCut(e.target.value)} />
-        <MDInput label="Nota Corte 2" onChange={(e) => setSecondCut(e.target.value)} />
-        <MDInput label="Nota Corte 3" onChange={(e) => setThirdCut(e.target.value)} />
+        <MDBox display="flex" justifyContent="center" alignItems="center" mt={2}>
+          <MDInput label="Nombre de la materia" onChange={(e) => setSubject(e.target.value)} />
+        </MDBox>
+
+        <MDBox display="flex" justifyContent="center" alignItems="center" mt={2}>
+          <MDInput label="Nota Corte 1" onChange={(e) => setFirstCut(e.target.value)} />
+        </MDBox>
+
+        <MDBox display="flex" justifyContent="center" alignItems="center" mt={2}>
+          <MDInput label="Nota Corte 2" onChange={(e) => setSecondCut(e.target.value)} />
+        </MDBox>
+
+        <MDBox display="flex" justifyContent="center" alignItems="center" mt={2}>
+          <MDInput label="Nota Corte 3" onChange={(e) => setThirdCut(e.target.value)} />
+        </MDBox>
+
         <MDBox mt={2}>
           <MDButton variant="gradient" color="success" onClick={handleAddSubject}>
             Agregar

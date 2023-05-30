@@ -37,7 +37,7 @@ function Tables() {
             description="Agregar una nueva materia"
             icon="add"
             action={
-              <MDBox mt={2}>
+              <MDBox mt={2} mb={2}>
                 <MDButton variant="gradient" color="warning" onClick={handleToggleCard}>
                   Cerrar
                 </MDButton>
