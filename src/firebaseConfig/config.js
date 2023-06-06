@@ -64,13 +64,35 @@ export const createSubject = async (
   user,
   subject,
   credits,
-  firstCut = -1,
-  secondCut = -1,
-  thirdCut = -1
+  firstCut,
+  secondCut,
+  thirdCut,
 ) => {
   if (!user) {
     return;
   }
+
+  if (subject === undefined) {
+    return;
+  }
+
+  console.log(subject);
+  console.log(credits);
+  console.log(firstCut);
+  console.log(secondCut);
+  console.log(thirdCut);
+
+  // eslint-disable-next-line no-unused-expressions,no-param-reassign
+  credits === undefined ? (credits = 0) : credits;
+  // eslint-disable-next-line no-unused-expressions,no-param-reassign
+  firstCut === undefined ? (firstCut = -1) : firstCut;
+  // eslint-disable-next-line no-unused-expressions,no-param-reassign
+  secondCut === undefined ? (secondCut = -1) : secondCut;
+  // eslint-disable-next-line no-unused-expressions,no-param-reassign
+  thirdCut === undefined ? (thirdCut = -1) : thirdCut;
+
+
+
 
   const subjectRef = doc(collection(db, "Registers"), user.uid, "subjects", subject);
 
@@ -148,6 +170,15 @@ export const editSubject = async (
   if (!user) {
     return;
   }
+
+  // eslint-disable-next-line no-unused-expressions,no-param-reassign
+  credits === undefined ? (credits = 0) : credits;
+  // eslint-disable-next-line no-unused-expressions,no-param-reassign
+  firstCut === undefined ? (firstCut = -1) : firstCut;
+  // eslint-disable-next-line no-unused-expressions,no-param-reassign
+  secondCut === undefined ? (secondCut = -1) : secondCut;
+  // eslint-disable-next-line no-unused-expressions,no-param-reassign
+  thirdCut === undefined ? (thirdCut = -1) : thirdCut;
 
   const subjectRef = doc(collection(db, "Registers", user.uid, "subjects"), subjectChange);
 

@@ -38,9 +38,9 @@ function DefaultInfoCard({
   const [subject, setSubject] = useState(rSubject.subject);
   const [credits, setCredits] = useState(rSubject.credits);
 
-  const [firstCut, setFirstCut] = useState(rSubject.firstCut == -1 ? undefined : rSubject.firstCut);
-  const [secondCut, setSecondCut] = useState(rSubject.secondCut == -1 ? undefined : rSubject.secondCut);
-  const [thirdCut, setThirdCut] = useState(rSubject.thirdCut == -1 ? undefined : rSubject.thirdCut);
+  const [firstCut, setFirstCut] = useState(rSubject.firstCut === -1 ? undefined : rSubject.firstCut);
+  const [secondCut, setSecondCut] = useState(rSubject.secondCut === -1 ? undefined : rSubject.secondCut);
+  const [thirdCut, setThirdCut] = useState(rSubject.thirdCut === -1 ? undefined : rSubject.thirdCut);
 
   const [edit, setEdit] = useState(false);
 
@@ -78,11 +78,13 @@ function DefaultInfoCard({
     } else {
       setCredits(undefined);
     }
-  }, [rSubject]);
+    console.log(user, subject, credits, firstCut, secondCut, thirdCut);
+  }, []);
 
 
 
   const handleAddSubject = () => {
+    console.log(user, subject, credits, firstCut, secondCut, thirdCut);
     createSubject(user, subject, credits, firstCut, secondCut, thirdCut);
     setFirstCut(undefined);
     setSecondCut(undefined);

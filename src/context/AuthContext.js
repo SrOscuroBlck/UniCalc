@@ -15,7 +15,7 @@ import {
 
 import { auth, createUserDocs } from "firebaseConfig/config";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(undefined);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -56,9 +56,7 @@ export function AuthProvider({ children }) {
     const provider = new GoogleAuthProvider();
     return signInWithPopup(auth, provider)
       .then((result) => {
-        createUserDocs(result.user);
-        console.log(result.user);
-        return true; // return a value to indicate successful authentication
+        createUserDocs(result.user).then(() => true);
       })
       .catch((error) => {
         throw error; // re-throw the error to be handled by the caller
@@ -69,8 +67,7 @@ export function AuthProvider({ children }) {
     const provider = new GithubAuthProvider();
     return signInWithPopup(auth, provider)
       .then(() => {
-        createUserDocs(currentUser);
-        return true; // return a value to indicate successful authentication
+        createUserDocs(currentUser).then(() => true);
       })
       .catch((error) => {
         throw error; // re-throw the error to be handled by the caller
@@ -81,10 +78,7 @@ export function AuthProvider({ children }) {
     const provider = new FacebookAuthProvider();
     return signInWithPopup(auth, provider)
       .then((result) => {
-        createUserDocs(result.user);
-        console.log(result);
-        console.log(result.user);
-        return true; // return a value to indicate successful authentication
+        createUserDocs(result.user).then(() => true);
       })
       .catch((error) => {
         throw error; // re-throw the error to be handled by the caller
@@ -95,10 +89,7 @@ export function AuthProvider({ children }) {
     const provider = new TwitterAuthProvider();
     return signInWithPopup(auth, provider)
       .then((result) => {
-        createUserDocs(result);
-        console.log(result);
-        console.log(result.user);
-        return true; // return a value to indicate successful authentication
+        createUserDocs(result).then(() => true);
       })
       .catch((error) => {
         throw error; // re-throw the error to be handled by the caller

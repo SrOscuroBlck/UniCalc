@@ -10,6 +10,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
 import ReportsLineChart from "examples/Charts/LineCharts/ReportsLineChart";
+import DoughnutChart from "examples/Charts/DoughnutCharts/DefaultDoughnutChart";
 import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
 
 // Data
@@ -20,123 +21,130 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
+import { useState, useEffect } from "react";
+import { useAuth } from "context/AuthContext";
+import { getSubjects } from "firebaseConfig/config";
+import probabilityDoughChartData from "./data/probabilityDoughChartData";
+
 function Dashboard() {
+  const { user } = useAuth();
+  const [subjects, setSubjects] = useState([]);
+  const [subjectDoughnutCharts, setSubjectDoughnutCharts] = useState([]);
   const { sales, tasks } = reportsLineChartData;
+
+  useEffect(() => {
+    // eslint-disable-next-line no-shadow
+    getSubjects(user).then((subjects) => {
+      setSubjects(subjects);
+    });
+  }, [user]);
+
+  useEffect(() => {
+    const generateDoughnutCharts = () => {
+      const doughnutCharts = [];
+
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < subjects.length; i++) {
+        let probability = 0;
+        let decimal = 0;
+        let needed = 0;
+        let message = "";
+
+        if (
+          subjects[i].firstCut === -1 &&
+          subjects[i].secondCut === -1 &&
+          subjects[i].thirdCut === -1
+        ) {
+          probability = 50;
+          message = "No has presentado ningún corte";
+        } else if (
+          subjects[i].firstCut !== -1 &&
+          subjects[i].secondCut === -1 &&
+          subjects[i].thirdCut === -1
+        ) {
+          needed = ((3 - subjects[i].firstCut * 0.3) / 0.7).toFixed(2);
+          message = `Necesitas un ${needed} en los dos siguientes cortes para pasar`;
+        } else if (
+          subjects[i].firstCut !== -1 &&
+          subjects[i].secondCut !== -1 &&
+          subjects[i].thirdCut === -1
+        ) {
+          needed = ((3 - subjects[i].firstCut * 0.3 - subjects[i].secondCut * 0.3) / 0.4).toFixed(2);
+          message = `Necesitas un ${needed} en el siguiente corte para pasar`;
+        } else if (
+          subjects[i].firstCut !== -1 &&
+          subjects[i].secondCut !== -1 &&
+          subjects[i].thirdCut !== -1
+        ) {
+          if (
+            subjects[i].firstCut * 0.3 + subjects[i].secondCut * 0.3 + subjects[i].thirdCut * 0.4 >=
+            3
+          ) {
+            needed = 0;
+            // eslint-disable-next-line no-unused-vars
+            message = "Ya pasaste la materia";
+          }
+        }
+
+        decimal = needed - Math.floor(needed) * 10;
+        if (decimal < 1) {
+          decimal = 10 + decimal;
+        }
+        if (needed > 5) {
+          probability = 0;
+        } else if (needed > 4 && needed <= 5) {
+          probability = (11 - decimal) * 2;
+        } else if (needed > 3 && needed <= 4) {
+          probability = (11 - decimal) * 2 + 20;
+        } else if (needed > 2 && needed <= 3) {
+          probability = (11 - decimal) * 2 + 40;
+        } else if (needed > 1 && needed <= 2) {
+          probability = (11 - decimal) * 2 + 60;
+        } else if (needed > 0 && needed <= 1) {
+          probability = (11 - decimal) * 2 + 80;
+        } else if (needed === 0 &&
+            subjects[i].firstCut !== -1 &&
+            subjects[i].secondCut !== -1 &&
+            subjects[i].thirdCut !== -1) {
+          probability = 100;
+        };
+
+        subjects[i].id === "Test" ? console.log(probability) : 0;
+        const chartData = {
+          labels: ["Ganar", "Perder"],
+          datasets: {
+            label: subjects[i].id,
+            backgroundColors: ["success", "error"],
+            data: [probability, 100 - probability],
+          },
+        };
+
+        doughnutCharts.push(
+          <Grid item xs={12} md={6} lg={4} key={i}>
+            <MDBox mb={3}>
+              <DoughnutChart
+                color="info"
+                title={subjects[i].id}
+                description={message}
+                chart={chartData}
+              />
+            </MDBox>
+          </Grid>
+        );
+      }
+
+      return doughnutCharts;
+    };
+    setSubjectDoughnutCharts(generateDoughnutCharts());
+  }, [subjects]);
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox py={3}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                color="dark"
-                icon="weekend"
-                title="Bookings"
-                count={281}
-                percentage={{
-                  color: "success",
-                  amount: "+55%",
-                  label: "than lask week",
-                }}
-              />
-            </MDBox>
-          </Grid>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                icon="leaderboard"
-                title="Today's Users"
-                count="2,300"
-                percentage={{
-                  color: "success",
-                  amount: "+3%",
-                  label: "than last month",
-                }}
-              />
-            </MDBox>
-          </Grid>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                color="success"
-                icon="store"
-                title="Revenue"
-                count="34k"
-                percentage={{
-                  color: "success",
-                  amount: "+1%",
-                  label: "than yesterday",
-                }}
-              />
-            </MDBox>
-          </Grid>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                color="primary"
-                icon="person_add"
-                title="Followers"
-                count="+91"
-                percentage={{
-                  color: "success",
-                  amount: "",
-                  label: "Just updated",
-                }}
-              />
-            </MDBox>
-          </Grid>
-        </Grid>
         <MDBox mt={4.5}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsBarChart
-                  color="info"
-                  title="website views"
-                  description="Last Campaign Performance"
-                  date="campaign sent 2 days ago"
-                  chart={reportsBarChartData}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="success"
-                  title="daily sales"
-                  description={
-                    <>
-                      (<strong>+15%</strong>) increase in today sales.
-                    </>
-                  }
-                  date="updated 4 min ago"
-                  chart={sales}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="dark"
-                  title="completed tasks"
-                  description="Last Campaign Performance"
-                  date="just updated"
-                  chart={tasks}
-                />
-              </MDBox>
-            </Grid>
-          </Grid>
-        </MDBox>
-        <MDBox>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={8}>
-              <Projects />
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <OrdersOverview />
-            </Grid>
+            {subjectDoughnutCharts}
           </Grid>
         </MDBox>
       </MDBox>
