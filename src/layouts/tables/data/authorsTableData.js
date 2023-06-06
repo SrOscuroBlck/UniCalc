@@ -9,14 +9,14 @@ import { useAuth } from "context/AuthContext";
 
 import { useState, useEffect } from "react";
 
-import { getSubjects } from "firebaseConfig/config";
+import { getSubjects, subscribeToSubjects, deleteSubject } from "firebaseConfig/config";
+import MDButton from "components/MDButton";
+import { Icon } from "@mui/material";
 
 function average(first, second, third) {
   if (first === -1 || second === -1 || third === -1) {
     return "Sin calificar";
   }
-
-  console.log((first * 0.3 + second * 0.3 + third * 0.4).toFixed(2));
   return (first * 0.3 + second * 0.3 + third * 0.4).toFixed(2);
 }
 
@@ -45,17 +45,23 @@ function status(grade) {
   };
 }
 
-export default function data() {
+export default function data({ handleOnEditCard }) {
   const [rows, setRows] = useState([]);
+  // const [initialized, setInitialized] = useState(false);
   const { user } = useAuth();
 
   useEffect(() => {
-    getSubjects(user).then((result) => {
-      const newRows = result.map((subject) => ({
+    const handleSubjectsUpdate = (updatedSubjects) => {
+      const newRows = updatedSubjects.map((subject) => ({
         subject: <Subject name={subject.subject} />,
+        credits: (
+          <MDTypography component="a" variant="caption" color="text" fontWeight="medium">
+            {subject.credits}
+          </MDTypography>
+        ),
         average: <Average grade={average(subject.firstCut, subject.secondCut, subject.thirdCut)} />,
         status: (
-          <MDBox ml={-1}>
+          <MDBox ml={1}>
             <MDBadge
               badgeContent={
                 status(average(subject.firstCut, subject.secondCut, subject.thirdCut)).text
@@ -67,14 +73,86 @@ export default function data() {
           </MDBox>
         ),
         action: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
-          </MDTypography>
+          <MDBox display="flex" justifyContent="center">
+            <MDBox mr={1}>
+              <MDButton
+                variant="outlined"
+                color="info"
+                size="small"
+                onClick={() => handleOnEditCard(subject)}
+              >
+                <Icon>edit</Icon>&nbsp;Editar
+              </MDButton>
+            </MDBox>
+            <MDBox>
+              <MDButton
+                variant="outlined"
+                color="error"
+                size="small"
+                onClick={() => deleteSubject(user, subject.id)}
+              >
+                <Icon>delete</Icon>&nbsp;Eliminar
+              </MDButton>
+            </MDBox>
+          </MDBox>
         ),
       }));
       setRows(newRows);
+    };
+
+    getSubjects(user).then((subjects) => {
+      const initialRows = subjects.map((subject) => ({
+        subject: <Subject name={subject.subject} />,
+        credits: (
+          <MDTypography component="a" variant="caption" color="text" fontWeight="medium">
+            {subject.credits}
+          </MDTypography>
+        ),
+        average: <Average grade={average(subject.firstCut, subject.secondCut, subject.thirdCut)} />,
+        status: (
+          <MDBox ml={1}>
+            <MDBadge
+              badgeContent={
+                status(average(subject.firstCut, subject.secondCut, subject.thirdCut)).text
+              }
+              color={status(average(subject.firstCut, subject.secondCut, subject.thirdCut)).color}
+              variant="gradient"
+              size="sm"
+            />
+          </MDBox>
+        ),
+        action: (
+          <MDBox display="flex" justifyContent="center">
+            <MDBox mr={1}>
+              <MDButton
+                variant="outlined"
+                color="info"
+                size="small"
+                onClick={() => handleOnEditCard(subject)}
+              >
+                <Icon>edit</Icon>&nbsp;Editar
+              </MDButton>
+            </MDBox>
+            <MDBox>
+              <MDButton
+                variant="outlined"
+                color="error"
+                size="small"
+                onClick={() => deleteSubject(user, subject.id)}
+              >
+                <Icon>delete</Icon>&nbsp;Eliminar
+              </MDButton>
+            </MDBox>
+          </MDBox>
+        ),
+      }));
+      setRows(initialRows);
     });
-  }, [rows]);
+
+    const unsubscribe = subscribeToSubjects(user, handleSubjectsUpdate);
+
+    return () => unsubscribe();
+  }, []);
 
   const Subject = ({ name }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
@@ -95,7 +173,8 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "Materia", accessor: "subject", width: "45%", align: "left" },
+      { Header: "Materia", accessor: "subject", width: "30%", align: "left" },
+      { Header: "Créditos", accessor: "credits", align: "left" },
       { Header: "Promedio", accessor: "average", align: "left" },
       { Header: "Estado", accessor: "status", align: "center" },
       { Header: "action", accessor: "action", align: "center" },

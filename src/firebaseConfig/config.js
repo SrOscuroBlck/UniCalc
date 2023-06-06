@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 
 import { getAuth } from "firebase/auth";
-import { getFirestore, collection, setDoc, doc, getDocs } from "firebase/firestore";
+import { getFirestore, collection, setDoc, doc, getDocs, onSnapshot, deleteDoc } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -63,6 +63,7 @@ export const createUserDocs = async (user, userName, photo) => {
 export const createSubject = async (
   user,
   subject,
+  credits,
   firstCut = -1,
   secondCut = -1,
   thirdCut = -1
@@ -76,6 +77,7 @@ export const createSubject = async (
   try {
     await setDoc(subjectRef, {
       subject,
+      credits,
       firstCut,
       secondCut,
       thirdCut,
@@ -103,6 +105,62 @@ export const getSubjects = async (user) => {
   } catch (error) {
     console.log(error);
     return null;
+  }
+};
+
+export const subscribeToSubjects = (user, callback) => {
+  if (!user) {
+    return null;
+  }
+  const subjectRef = collection(db, "Registers", user.uid, "subjects");
+
+  return onSnapshot(subjectRef, (snapshot) => {
+    const subjects = snapshot.docs.map((document) => ({
+      id: document.id,
+      ...document.data(),
+    }));
+    callback(subjects);
+  });
+};
+
+export const deleteSubject = async (user, subject) => {
+  if (!user) {
+    return null;
+  }
+  const subjectRef = doc(collection(db, "Registers", user.uid, "subjects"), subject);
+
+  try {
+    await deleteDoc(subjectRef);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const editSubject = async (
+  user,
+  subjectChange,
+  subject,
+  credits = 0,
+  firstCut = -1,
+  secondCut = -1,
+  thirdCut = -1
+) => {
+  if (!user) {
+    return;
+  }
+
+  const subjectRef = doc(collection(db, "Registers", user.uid, "subjects"), subjectChange);
+
+  try {
+    await setDoc(subjectRef, {
+      subject,
+      credits,
+      firstCut,
+      secondCut,
+      thirdCut,
+    });
+  } catch (error) {
+    console.log(error);
   }
 };
 

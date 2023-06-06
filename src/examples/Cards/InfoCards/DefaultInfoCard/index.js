@@ -6,8 +6,8 @@ import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import Icon from "@mui/material/Icon";
 
-import { useState } from "react";
-import { createSubject } from "firebaseConfig/config";
+import { useState, useEffect } from "react";
+import { createSubject, editSubject } from "firebaseConfig/config";
 import { useAuth } from "context/AuthContext";
 
 // Material Dashboard 2 React components
@@ -16,19 +16,93 @@ import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
 
-function DefaultInfoCard({ color, icon, title, description, value, action }) {
+function DefaultInfoCard({
+  color,
+  icon,
+  title,
+  description,
+  value,
+  action,
+  rSubject = {
+    subject: undefined,
+    credits: undefined,
+    firstCut: undefined,
+    secondCut: undefined,
+    thirdCut: undefined,
+  },
+  close,
+}) {
   const { user } = useAuth();
-  const [subject, setSubject] = useState("");
-  const [firstCut, setFirstCut] = useState();
-  const [secondCut, setSecondCut] = useState();
-  const [thirdCut, setThirdCut] = useState();
+  
+
+  const [subject, setSubject] = useState(rSubject.subject);
+  const [credits, setCredits] = useState(rSubject.credits);
+
+  const [firstCut, setFirstCut] = useState(rSubject.firstCut == -1 ? undefined : rSubject.firstCut);
+  const [secondCut, setSecondCut] = useState(rSubject.secondCut == -1 ? undefined : rSubject.secondCut);
+  const [thirdCut, setThirdCut] = useState(rSubject.thirdCut == -1 ? undefined : rSubject.thirdCut);
+
+  const [edit, setEdit] = useState(false);
+
+  useEffect(() => {
+    if (rSubject.subject !== undefined) {
+      setEdit(true);
+    }
+  }, [rSubject]);
+
+  useEffect(() => {
+    if (rSubject.subject !== undefined) {
+      setEdit(true);
+    }
+  
+    if (rSubject.firstCut !== undefined && rSubject.firstCut !== -1) {
+      setFirstCut(rSubject.firstCut);
+    } else {
+      setFirstCut(undefined);
+    }
+  
+    if (rSubject.secondCut !== undefined && rSubject.secondCut !== -1) {
+      setSecondCut(rSubject.secondCut);
+    } else {
+      setSecondCut(undefined);
+    }
+  
+    if (rSubject.thirdCut !== undefined && rSubject.thirdCut !== -1) {
+      setThirdCut(rSubject.thirdCut);
+    } else {
+      setThirdCut(undefined);
+    }
+  
+    if (rSubject.credits !== undefined && rSubject.credits !== 0) {
+      setCredits(rSubject.credits);
+    } else {
+      setCredits(undefined);
+    }
+  }, [rSubject]);
+
+
+
   const handleAddSubject = () => {
-    createSubject(user, subject, firstCut, secondCut, thirdCut);
-    setFirstCut(-1);
-    setSecondCut(-1);
-    setThirdCut(-1);
-    setSubject("");
+    createSubject(user, subject, credits, firstCut, secondCut, thirdCut);
+    setFirstCut(undefined);
+    setSecondCut(undefined);
+    setThirdCut(undefined);
+    setSubject(undefined);
+    setCredits(undefined);
+    close();
   };
+
+  const handleEditSubject = (subjectChange) => {
+    editSubject(user, subjectChange, subject, credits, firstCut, secondCut, thirdCut);
+    setFirstCut(undefined);
+    setSecondCut(undefined);
+    setThirdCut(undefined);
+    setSubject(undefined);
+    setCredits(undefined);
+    close();
+  }
+
+
   return (
     <Card>
       <MDBox p={2} mx={3} display="flex" justifyContent="center">
@@ -63,25 +137,35 @@ function DefaultInfoCard({ color, icon, title, description, value, action }) {
           </MDTypography>
         )}
         <MDBox display="flex" justifyContent="center" alignItems="center" mt={2}>
-          <MDInput label="Nombre de la materia" onChange={(e) => setSubject(e.target.value)} />
+          <MDInput label="Nombre de la materia" onChange={(e) => setSubject(e.target.value)} value={subject} />
         </MDBox>
 
         <MDBox display="flex" justifyContent="center" alignItems="center" mt={2}>
-          <MDInput label="Nota Corte 1" onChange={(e) => setFirstCut(e.target.value)} />
+          <MDInput label="Creditos" onChange={(e) => setCredits(e.target.value)} value={credits} />
         </MDBox>
 
         <MDBox display="flex" justifyContent="center" alignItems="center" mt={2}>
-          <MDInput label="Nota Corte 2" onChange={(e) => setSecondCut(e.target.value)} />
+          <MDInput label="Nota Corte 1" onChange={(e) => setFirstCut(e.target.value)} value={firstCut} />
         </MDBox>
 
         <MDBox display="flex" justifyContent="center" alignItems="center" mt={2}>
-          <MDInput label="Nota Corte 3" onChange={(e) => setThirdCut(e.target.value)} />
+          <MDInput label="Nota Corte 2" onChange={(e) => setSecondCut(e.target.value)} value={secondCut} />
+        </MDBox>
+
+        <MDBox display="flex" justifyContent="center" alignItems="center" mt={2}>
+          <MDInput label="Nota Corte 3" onChange={(e) => setThirdCut(e.target.value)} value={thirdCut} />
         </MDBox>
 
         <MDBox mt={2}>
-          <MDButton variant="gradient" color="success" onClick={handleAddSubject}>
-            Agregar
-          </MDButton>
+          {edit ? (
+            <MDButton variant="gradient" color="success" onClick={() => handleEditSubject(rSubject.id)}>  
+              Editar
+            </MDButton>
+          ) : (
+            <MDButton variant="gradient" color="success" onClick={handleAddSubject}>
+              Agregar
+            </MDButton>
+          )}
         </MDBox>
         {action && <MDBox mt={2}>{action}</MDBox>}
       </MDBox>
