@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e0591e3-92b6-40cf-8afa-86f34412adff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/layouts/dashboard/data/probabilityDoughChartData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/context/AuthContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/context/AuthContext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/Cards/InfoCards/DefaultInfoCard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/Cards/InfoCards/DefaultInfoCard/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebaseConfig/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebaseConfig/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/dashboard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/dashboard/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/rtl/components/OrdersOverview/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/rtl/components/Projects/data/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/rtl/components/Projects/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/rtl/data/reportsBarChartData.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/rtl/data/reportsLineChartData.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/rtl/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +72,7 @@
       <updated>1686074252428</updated>
       <workItem from="1686074254163" duration="761000" />
       <workItem from="1686075270296" duration="2036000" />
-      <workItem from="1686077324483" duration="11951000" />
+      <workItem from="1686077324483" duration="12174000" />
     </task>
     <servers />
   </component>
