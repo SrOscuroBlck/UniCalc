@@ -30,7 +30,7 @@ function Dashboard() {
   const { user } = useAuth();
   const [subjects, setSubjects] = useState([]);
   const [subjectDoughnutCharts, setSubjectDoughnutCharts] = useState([]);
-  const { sales, tasks } = reportsLineChartData;
+  const [semesterAverage, setSemesterAverage] = useState(0);
 
   useEffect(() => {
     // eslint-disable-next-line no-shadow
@@ -47,7 +47,7 @@ function Dashboard() {
       for (let i = 0; i < subjects.length; i++) {
         let probability = 0;
         let decimal = 0;
-        let needed = 0.00;
+        let needed = 0.0;
         let message = "";
 
         if (
@@ -62,14 +62,14 @@ function Dashboard() {
           subjects[i].secondCut === -1 &&
           subjects[i].thirdCut === -1
         ) {
-          needed = ((3 - subjects[i].firstCut * 0.3) / 0.7);
+          needed = (3 - subjects[i].firstCut * 0.3) / 0.7;
           message = `Necesitas un ${needed.toFixed(2)} en los dos siguientes cortes para pasar`;
         } else if (
           subjects[i].firstCut !== -1 &&
           subjects[i].secondCut !== -1 &&
           subjects[i].thirdCut === -1
         ) {
-          needed = ((3 - subjects[i].firstCut * 0.3 - subjects[i].secondCut * 0.3) / 0.4);
+          needed = (3 - subjects[i].firstCut * 0.3 - subjects[i].secondCut * 0.3) / 0.4;
           message = `Necesitas un ${needed.toFixed(2)} en el siguiente corte para pasar`;
         } else if (
           subjects[i].firstCut !== -1 &&
@@ -102,7 +102,12 @@ function Dashboard() {
           probability = (11 - decimal) * 2 + 60;
         } else if (needed > 0 && needed <= 1) {
           probability = (11 - decimal) * 2 + 80;
-        } else if (needed === 0.00 && (subjects[i].firstCut !== -1 || subjects[i].secondCut !== -1 || subjects[i].thirdCut !== -1)) {
+        } else if (
+          needed === 0.0 &&
+          (subjects[i].firstCut !== -1 ||
+            subjects[i].secondCut !== -1 ||
+            subjects[i].thirdCut !== -1)
+        ) {
           probability = 100;
         }
 
@@ -128,16 +133,56 @@ function Dashboard() {
           </Grid>
         );
       }
-
       return doughnutCharts;
     };
     setSubjectDoughnutCharts(generateDoughnutCharts());
+  }, [subjects]);
+
+  useEffect(() => {
+    const generateSemesterAverage = () => {
+      let average = 0;
+      let total = 0;
+      let credits = 0;
+
+      for (let i = 0; i < subjects.length; i++) {
+        let firstCut = 0;
+        let secondCut = 0;
+        let thirdCut = 0;
+
+        subjects[i].firstCut === -1 ? (firstCut = 0) : (firstCut = subjects[i].firstCut * 0.3);
+        subjects[i].secondCut === -1 ? (secondCut = 0) : (secondCut = subjects[i].secondCut * 0.3);
+        subjects[i].thirdCut === -1 ? (thirdCut = 0) : (thirdCut = subjects[i].thirdCut * 0.4);
+
+        total += (firstCut + secondCut + thirdCut) * subjects[i].credits;
+        credits += parseFloat(subjects[i].credits);
+      }
+      average = total / credits;
+      return average.toFixed(2);
+    };
+    setSemesterAverage(generateSemesterAverage());
   }, [subjects]);
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox py={3}>
+        <MDBox mb={4.5}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6} lg={12}>
+              <MDBox mb={3} mt={3}>
+                <ComplexStatisticsCard
+                  title="Promedio del semestre"
+                  count={semesterAverage}
+                  icon="leaderboard"
+                  color="info"
+                  percentage={{
+                    label:"El promedio del semestre es calculado con base en los cortes de las materias que has presentado, si el resultado es bajo no te asustes, aún tienes tiempo para mejorarlo."
+                  }}
+                />
+              </MDBox>
+            </Grid>
+          </Grid>
+        </MDBox>
         <MDBox mt={4.5}>
           <Grid container spacing={3}>
             {subjectDoughnutCharts}
