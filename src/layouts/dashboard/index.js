@@ -76,13 +76,12 @@ function Dashboard() {
           subjects[i].secondCut !== -1 &&
           subjects[i].thirdCut !== -1
         ) {
-          if (
-            subjects[i].firstCut * 0.3 + subjects[i].secondCut * 0.3 + subjects[i].thirdCut * 0.4 >=
-            3
-          ) {
+          if ((subjects[i].firstCut * 0.3 + subjects[i].secondCut * 0.3 + subjects[i].thirdCut * 0.4) >= 3) {
             needed = 0;
-            // eslint-disable-next-line no-unused-vars
             message = "Ya pasaste la materia";
+          } else {
+            message = "Ya no puedes pasar la materia";
+            needed = 6
           }
         }
 
