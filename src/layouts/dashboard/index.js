@@ -43,6 +43,8 @@ function Dashboard() {
     const generateDoughnutCharts = () => {
       const doughnutCharts = [];
 
+      console.log(subjects)
+
       // eslint-disable-next-line no-plusplus
       for (let i = 0; i < subjects.length; i++) {
         let probability = 0;
@@ -148,9 +150,9 @@ function Dashboard() {
         let secondCut = 0;
         let thirdCut = 0;
 
-        subjects[i].firstCut === -1 ? (firstCut = 0) : (firstCut = subjects[i].firstCut * 0.3);
-        subjects[i].secondCut === -1 ? (secondCut = 0) : (secondCut = subjects[i].secondCut * 0.3);
-        subjects[i].thirdCut === -1 ? (thirdCut = 0) : (thirdCut = subjects[i].thirdCut * 0.4);
+        subjects[i].firstCut === "" ? (firstCut = 0) : (firstCut = subjects[i].firstCut * 0.3);
+        subjects[i].secondCut === "" ? (secondCut = 0) : (secondCut = subjects[i].secondCut * 0.3);
+        subjects[i].thirdCut === "" ? (thirdCut = 0) : (thirdCut = subjects[i].thirdCut * 0.4);
 
         total += (firstCut + secondCut + thirdCut) * subjects[i].credits;
         credits += parseFloat(subjects[i].credits);
