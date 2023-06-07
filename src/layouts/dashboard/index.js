@@ -47,7 +47,7 @@ function Dashboard() {
       for (let i = 0; i < subjects.length; i++) {
         let probability = 0;
         let decimal = 0;
-        let needed = 0;
+        let needed = 0.00;
         let message = "";
 
         if (
@@ -62,15 +62,15 @@ function Dashboard() {
           subjects[i].secondCut === -1 &&
           subjects[i].thirdCut === -1
         ) {
-          needed = ((3 - subjects[i].firstCut * 0.3) / 0.7).toFixed(2);
-          message = `Necesitas un ${needed} en los dos siguientes cortes para pasar`;
+          needed = ((3 - subjects[i].firstCut * 0.3) / 0.7);
+          message = `Necesitas un ${needed.toFixed(2)} en los dos siguientes cortes para pasar`;
         } else if (
           subjects[i].firstCut !== -1 &&
           subjects[i].secondCut !== -1 &&
           subjects[i].thirdCut === -1
         ) {
-          needed = ((3 - subjects[i].firstCut * 0.3 - subjects[i].secondCut * 0.3) / 0.4).toFixed(2);
-          message = `Necesitas un ${needed} en el siguiente corte para pasar`;
+          needed = ((3 - subjects[i].firstCut * 0.3 - subjects[i].secondCut * 0.3) / 0.4);
+          message = `Necesitas un ${needed.toFixed(2)} en el siguiente corte para pasar`;
         } else if (
           subjects[i].firstCut !== -1 &&
           subjects[i].secondCut !== -1 &&
@@ -102,14 +102,10 @@ function Dashboard() {
           probability = (11 - decimal) * 2 + 60;
         } else if (needed > 0 && needed <= 1) {
           probability = (11 - decimal) * 2 + 80;
-        } else if (needed === 0 &&
-            subjects[i].firstCut !== -1 &&
-            subjects[i].secondCut !== -1 &&
-            subjects[i].thirdCut !== -1) {
+        } else if (needed === 0.00 && (subjects[i].firstCut !== -1 || subjects[i].secondCut !== -1 || subjects[i].thirdCut !== -1)) {
           probability = 100;
-        };
+        }
 
-        subjects[i].id === "Test" ? console.log(probability) : 0;
         const chartData = {
           labels: ["Ganar", "Perder"],
           datasets: {

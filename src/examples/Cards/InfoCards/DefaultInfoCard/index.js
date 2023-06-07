@@ -78,13 +78,11 @@ function DefaultInfoCard({
     } else {
       setCredits(undefined);
     }
-    console.log(user, subject, credits, firstCut, secondCut, thirdCut);
   }, []);
 
 
 
   const handleAddSubject = () => {
-    console.log(user, subject, credits, firstCut, secondCut, thirdCut);
     createSubject(user, subject, credits, firstCut, secondCut, thirdCut);
     setFirstCut(undefined);
     setSecondCut(undefined);
@@ -139,7 +137,7 @@ function DefaultInfoCard({
           </MDTypography>
         )}
         <MDBox display="flex" justifyContent="center" alignItems="center" mt={2}>
-          <MDInput label="Nombre de la materia" onChange={(e) => setSubject(e.target.value)} value={subject} />
+          <MDInput label="Nombre de la materia" onChange={(e) => setSubject(e.target.value)} value={subject} required />
         </MDBox>
 
         <MDBox display="flex" justifyContent="center" alignItems="center" mt={2}>

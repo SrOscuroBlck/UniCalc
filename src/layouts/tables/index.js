@@ -68,7 +68,6 @@ function Tables() {
 
 
   useEffect(() => {
-    console.log(auxSubject);
     if (auxSubject !== null) {
       setToggleEditCard(true);
     }

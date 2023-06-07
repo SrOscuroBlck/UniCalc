@@ -76,12 +76,6 @@ export const createSubject = async (
     return;
   }
 
-  console.log(subject);
-  console.log(credits);
-  console.log(firstCut);
-  console.log(secondCut);
-  console.log(thirdCut);
-
   // eslint-disable-next-line no-unused-expressions,no-param-reassign
   credits === undefined ? (credits = 0) : credits;
   // eslint-disable-next-line no-unused-expressions,no-param-reassign
@@ -117,12 +111,10 @@ export const getSubjects = async (user) => {
 
   try {
     const snapshot = await getDocs(subjectRef);
-    console.log(snapshot);
     const subjects = snapshot.docs.map((document) => ({
       id: document.id,
       ...document.data(),
     }));
-    console.log(subjects);
     return subjects;
   } catch (error) {
     console.log(error);

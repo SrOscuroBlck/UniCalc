@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e0591e3-92b6-40cf-8afa-86f34412adff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Cards/InfoCards/DefaultInfoCard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/Cards/InfoCards/DefaultInfoCard/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/firebaseConfig/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebaseConfig/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/dashboard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/dashboard/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/tables/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/tables/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +57,9 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="ReactBuddySettings">
+    <option name="extensionsIgnore" value="true" />
+  </component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -72,7 +78,8 @@
       <updated>1686074252428</updated>
       <workItem from="1686074254163" duration="761000" />
       <workItem from="1686075270296" duration="2036000" />
-      <workItem from="1686077324483" duration="12174000" />
+      <workItem from="1686077324483" duration="12676000" />
+      <workItem from="1686095766484" duration="1026000" />
     </task>
     <servers />
   </component>
