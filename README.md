@@ -16,17 +16,17 @@ Algunos comandos son:
 - MacOS: "Command + Barra espaciadora", luego escribiendo "Terminal" y presiona Enter.
 - Linux: "Ctrl + Alt + T"
 ### 2. Clona el repositorio a tu máquina local: 
-- git clone https://github.com/SrOscuroBlck/UniCalc.git
+    git clone https://github.com/SrOscuroBlck/UniCalc.git
 ### 3. Accede al directorio:
-- cd UniCalc  
+    cd UniCalc  
 ### 4. Instala las librerias y dependencias
-- npm install
+    npm install
 
 ## Uso
 
 ### 1. Abra la terminal en el proyecto
 ### 2. Inicia el servidor de desarrollo de Django
-- npm start
+    npm start
 
 ## Créditos
 
