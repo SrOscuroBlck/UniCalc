@@ -25,7 +25,7 @@ Algunos comandos son:
 ## Uso
 
 ### 1. Abra la terminal en el proyecto
-### 2. Inicia el servidor de desarrollo de Django
+### 2. Inicia el servidor de desarrollo React
     npm start
 
 ## Créditos
