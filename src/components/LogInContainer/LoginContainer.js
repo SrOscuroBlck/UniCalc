@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
-import uniCalcLogo from "assets/images/logo-ct.svg";
+import uniCalcLogo from "../../assets/images/logo-unicalc-dark.svg";
 
 import { Button } from "@mui/material";
 

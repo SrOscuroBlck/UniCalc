@@ -35,8 +35,8 @@ import routes from "routes";
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
 
 // Images
-import brandWhite from "assets/images/logo-ct.svg";
-import brandDark from "assets/images/logo-ct-dark.svg";
+import brandWhite from "./assets/images/logo-unicalc-dark.svg";
+import brandDark from "./assets/images/logo-unicalc.svg";
 
 export default function Dash() {
   const [controller, dispatch] = useMaterialUIController();

@@ -6,10 +6,75 @@
   <component name="ChangeListManager">
     <list default="true" id="6e0591e3-92b6-40cf-8afa-86f34412adff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/examples/Cards/InfoCards/DefaultInfoCard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/Cards/InfoCards/DefaultInfoCard/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebaseConfig/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebaseConfig/config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dash.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dash.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/apple-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/bg-reset-cover.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/bg-sign-in-basic.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/bg-sign-up-cover.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/bruce-mars.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/home-decor-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/home-decor-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/home-decor-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/home-decor-4.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/icons/flags/AU.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/icons/flags/BR.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/icons/flags/DE.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/icons/flags/GB.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/icons/flags/US.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/illustrations/pattern-tree.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/ivana-square.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/kal-visuals-square.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/logo-ct-dark.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/logo-unicalc.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/logo-ct.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/logo-unicalc-dark.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/logos/gray-logos/logo-coinbase.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/logos/gray-logos/logo-nasa.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/logos/gray-logos/logo-netflix.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/logos/gray-logos/logo-pinterest.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/logos/gray-logos/logo-spotify.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/logos/gray-logos/logo-vodafone.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/logos/mastercard.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/logos/visa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/marie.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/team-1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/team-2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/team-3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/team-4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/team-5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LogInContainer/LoginContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LogInContainer/LoginContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ProtecteDRouted/ProtectedRouted.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProtectedRoutes/ProtectedRouted.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Items/NotificationItem/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Items/NotificationItem/styles.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Lists/ProfilesList/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Navbars/DashboardNavbar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/examples/Navbars/DashboardNavbar/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Timeline/TimelineItem/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Timeline/TimelineItem/styles.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Timeline/TimelineList/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/examples/Timeline/context/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/authentication/components/BasicLayout/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/authentication/components/CoverLayout/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/authentication/components/Footer/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/authentication/reset-password/cover/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/authentication/sign-in/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/authentication/sign-up/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/billing/components/Bill/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/billing/components/BillingInformation/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/billing/components/Invoice/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/billing/components/Invoices/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/billing/components/PaymentMethod/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/billing/components/Transaction/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/billing/components/Transactions/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/billing/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/dashboard/components/OrdersOverview/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/dashboard/components/Projects/data/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/dashboard/components/Projects/index.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layouts/dashboard/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/dashboard/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/tables/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/tables/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/notifications/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/profile/components/PlatformSettings/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/profile/data/profilesListData.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layouts/profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/profile/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,21 +107,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "fixed__files",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactBuddySettings">
     <option name="extensionsIgnore" value="true" />
   </component>
@@ -79,7 +144,9 @@
       <workItem from="1686074254163" duration="761000" />
       <workItem from="1686075270296" duration="2036000" />
       <workItem from="1686077324483" duration="12676000" />
-      <workItem from="1686095766484" duration="1026000" />
+      <workItem from="1686095766484" duration="1135000" />
+      <workItem from="1686161543333" duration="2637000" />
+      <workItem from="1686949875187" duration="4208000" />
     </task>
     <servers />
   </component>
